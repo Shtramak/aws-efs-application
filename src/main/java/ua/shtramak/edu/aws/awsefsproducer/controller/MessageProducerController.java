@@ -22,7 +22,8 @@ public class MessageProducerController {
     }
 
     @PostMapping
-    public void saveMessage(@RequestBody String message, @RequestHeader("X-Forwarded-For") String clientIp) {
+    public void saveMessage(@RequestBody String message,
+                            @RequestHeader(required = false, name = "X-Forwarded-For") String clientIp) {
         String currentMessage = Optional.ofNullable(clientIp)
                 .map(ip -> ip + ": " + message)
                 .orElse("");
