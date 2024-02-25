@@ -25,8 +25,8 @@ public class MessageProducerController {
     public void saveMessage(@RequestBody String message,
                             @RequestHeader(required = false, name = "X-Forwarded-For") String clientIp) {
         String currentMessage = Optional.ofNullable(clientIp)
-                .map(ip -> ip + ": " + message)
-                .orElse(message);
+                .map(ip -> ip + ": " + message+"\n")
+                .orElse(message+"\n");
         
         service.saveMessageToFile(currentMessage);
     }
